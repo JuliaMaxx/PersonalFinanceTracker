@@ -133,9 +133,11 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL = 'landing_page'
@@ -152,8 +154,6 @@ if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY:
     INSTALLED_APPS += ["storages"]
 
     STATICFILES_STORAGE = "personal_finance_tracker.storage_backends.StaticAzureStorage"
-    STATIC_URL = ( f"https://{os.environ.get('AZURE_ACCOUNT_NAME')}.blob.core.windows.net/" f"{os.environ.get('AZURE_STATIC_CONTAINER', 'static')}/" )
-else:
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    STATIC_URL = ( f"https://{os.environ.get('AZURE_ACCOUNT_NAME')}.blob.core.windows.net/static/" )
 
 
