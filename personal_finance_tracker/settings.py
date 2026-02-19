@@ -132,7 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles_collected"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -148,9 +148,6 @@ AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")
 AZURE_STATIC_CONTAINER = "static"
 
 if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY:
-    STATICFILES_DIRS = [
-        BASE_DIR / "staticfiles",
-    ]
 
     INSTALLED_APPS += ["storages"]
 
