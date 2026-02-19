@@ -148,6 +148,10 @@ AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")
 AZURE_STATIC_CONTAINER = "static"
 
 if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY:
+    STATICFILES_DIRS = [
+        BASE_DIR / "staticfiles",
+    ]
+
     INSTALLED_APPS += ["storages"]
 
     from storages.backends.azure_storage import AzureStorage
