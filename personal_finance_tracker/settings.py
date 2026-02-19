@@ -160,6 +160,7 @@ if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY:
         account_name = AZURE_ACCOUNT_NAME
         account_key = AZURE_ACCOUNT_KEY
         azure_container = AZURE_STATIC_CONTAINER
+        expiration_secs = None
 
     STATICFILES_STORAGE = "personal_finance_tracker.settings.StaticAzureStorage"
     STATIC_URL = f"https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_STATIC_CONTAINER}/"
