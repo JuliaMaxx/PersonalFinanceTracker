@@ -143,8 +143,6 @@ current_month = datetime.datetime.now().strftime('%b')
 LOGIN_REDIRECT_URL = f'/finance_tracker/{current_month}/'
 
 # Azure Storage for Static Files
-AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME")
-AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")
 AZURE_STATIC_CONTAINER = "static"
 
 if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY:
@@ -152,7 +150,7 @@ if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY:
     INSTALLED_APPS += ["storages"]
 
     STATICFILES_STORAGE = "personal_finance_tracker.storage_backends.StaticAzureStorage"
-    STATIC_URL = f"https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_STATIC_CONTAINER}/"
+    STATIC_URL = ( f"https://{os.environ.get('AZURE_ACCOUNT_NAME')}.blob.core.windows.net/" f"{os.environ.get('AZURE_STATIC_CONTAINER', 'static')}/" )
 else:
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
