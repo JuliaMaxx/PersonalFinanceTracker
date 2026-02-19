@@ -134,8 +134,6 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -155,7 +153,13 @@ if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY:
     from storages.backends.azure_storage import AzureStorage
 
     class StaticAzureStorage(AzureStorage):
+        account_name = AZURE_ACCOUNT_NAME
+        account_key = AZURE_ACCOUNT_KEY
         azure_container = AZURE_STATIC_CONTAINER
 
     STATICFILES_STORAGE = "personal_finance_tracker.settings.StaticAzureStorage"
     STATIC_URL = f"https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_STATIC_CONTAINER}/"
+else:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
