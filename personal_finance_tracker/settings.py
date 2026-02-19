@@ -143,3 +143,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL = 'landing_page'
 current_month = datetime.datetime.now().strftime('%b')
 LOGIN_REDIRECT_URL = f'/finance_tracker/{current_month}/'
+
+# Azure Storage for Static Files
+AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME")
+AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")
+AZURE_STATIC_CONTAINER = "static"
+
+if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY:
+    INSTALLED_APPS += ["storages"]
+
+    from storages.backends.azure_storage import AzureStorage
+
+    class StaticAzureStorage(AzureStorage):
+        azure_container = AZURE_STATIC_CONTAINER
+
+    STATICFILES_STORAGE = "personal_finance_tracker.settings.StaticAzureStorage"
+    STATIC_URL = f"https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_STATIC_CONTAINER}/"
