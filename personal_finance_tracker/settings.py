@@ -143,6 +143,8 @@ current_month = datetime.datetime.now().strftime('%b')
 LOGIN_REDIRECT_URL = f'/finance_tracker/{current_month}/'
 
 # Azure Storage for Static Files
+AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME")
+AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")
 AZURE_STATIC_CONTAINER = "static"
 
 if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY:
