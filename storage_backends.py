@@ -1,8 +1,9 @@
+import os
 from storages.backends.azure_storage import AzureStorage
-from django.conf import settings
 
 class StaticAzureStorage(AzureStorage):
-    account_name = settings.AZURE_ACCOUNT_NAME
-    account_key = settings.AZURE_ACCOUNT_KEY
-    azure_container = settings.AZURE_STATIC_CONTAINER
+    account_name = os.environ.get("AZURE_ACCOUNT_NAME")
+    account_key = os.environ.get("AZURE_ACCOUNT_KEY")
+    azure_container = os.environ.get("AZURE_STATIC_CONTAINER", "static")
     expiration_secs = None
+    azure_overwrite_files = True
