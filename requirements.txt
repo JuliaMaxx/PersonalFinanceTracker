@@ -12,8 +12,5 @@ python-dotenv==1.2.1
 gunicorn==25.0.1
 psycopg2-binary==2.9.11
 django-storages==1.14.6
-azure-storage-blob==12.28.0
-pymongo==4.16.0
+boto3==1.35.22
 whitenoise==6.11.0
-django-storages
-azure-storage-blob

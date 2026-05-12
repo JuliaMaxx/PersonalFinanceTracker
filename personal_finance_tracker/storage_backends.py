@@ -1,9 +1,12 @@
-import os
-from storages.backends.azure_storage import AzureStorage
+from storages.backends.s3boto3 import S3Boto3Storage
 
-class StaticAzureStorage(AzureStorage):
-    account_name = os.environ.get("AZURE_ACCOUNT_NAME")
-    account_key = os.environ.get("AZURE_ACCOUNT_KEY")
-    azure_container = os.environ.get("AZURE_STATIC_CONTAINER", "static")
-    expiration_secs = None
-    azure_overwrite_files = True
+
+class StaticStorage(S3Boto3Storage):
+    location = "static"
+    default_acl = "public-read"
+
+
+class MediaStorage(S3Boto3Storage):
+    location = "media"
+    default_acl = "public-read"
+    file_overwrite = False
